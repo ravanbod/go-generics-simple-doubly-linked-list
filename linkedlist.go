@@ -13,6 +13,7 @@ type Node[T comparable] struct {
 	val  T
 }
 
+// It accepts arbitrary number of T
 func (l *List[T]) insert(val ...T) { // It accepts arbitrary number of T
 	if l.head == nil {
 		l.head = &Node[T]{val: val[0]}
@@ -41,9 +42,10 @@ func (l *List[T]) returnReverseAsSlice() []T {
 		r = append(r, current.val)
 	}
 	return r
-} 
+}
 
-func (l *List[T]) findByValue(val T) (int, *Node[T], error) { // It will return error if it doesn't find node with value = val
+// It will return error if it doesn't find node with value = val
+func (l *List[T]) findByValue(val T) (int, *Node[T], error) { 
 	for index, current := 0, l.head; current != nil; index, current = index+1, current.next {
 		if current.val == val {
 			return index, current, nil
@@ -52,7 +54,8 @@ func (l *List[T]) findByValue(val T) (int, *Node[T], error) { // It will return 
 	return 0, nil, errors.New("Node Not found")
 }
 
-func (l *List[T]) deleteByValue(val T) error { // It will return error if it doesn't find node with value = val
+// It will return error if it doesn't find node with value = val
+func (l *List[T]) deleteByValue(val T) error { 
 	_, node, err := l.findByValue(val)
 	if err != nil {
 		return err
